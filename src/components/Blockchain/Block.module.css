@@ -1,0 +1,11 @@
+.block {
+  width: calc(100% / 5);
+  min-width: 128px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+  .block {
+    width: 100%;
+  }
+}
