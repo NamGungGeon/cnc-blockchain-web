@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Block from "./Block";
-import Transaction from "./Transaction";
 import Balance from "./Balance";
 
 import { Center, Heading, Stack, Tag, Button, Text } from "@chakra-ui/react";

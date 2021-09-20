@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading } from "@chakra-ui/react";
 import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
-import { Transaction as Tx } from "../../modules/blockchain";
+import Test from "../../modules/blockchain";
 import useInput from "../../hooks/useInput";
 import CryptoJS from "crypto-js";
 import { fromPrivateKey } from "../../modules/keygen";
 
+const Tx = Test.Transaction;
+console.log(Test);
 const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
+  console.log(Tx);
   const defaultInput = {
     fromAddr: keyPair.getPublic("hex"),
     signKey: keyPair.getPrivate("hex"),

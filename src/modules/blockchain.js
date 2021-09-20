@@ -291,7 +291,9 @@ Blockchain.restore = function (json) {
   return blockchain;
 };
 
-module.exports = {
-  Blockchain,
-  Transaction,
-};
+// module.exports = {
+//   Blockchain,
+//   Transaction,
+// };
+
+export default { Blockchain, Transaction };
