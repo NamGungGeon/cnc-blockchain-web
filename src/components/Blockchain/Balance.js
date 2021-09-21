@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Tag } from "@chakra-ui/tag";
-import { keys } from "../../modules/keygen";
 import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
 import { Alert, Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading, Box, AlertIcon } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
-import Spacing from "../Spacing/Spacing";
 
 const Balance = ({ blockchain }) => {
-  console.log(keys);
   const myKeyPair = keypair.value;
 
   const [input, handleInput] = useInput({

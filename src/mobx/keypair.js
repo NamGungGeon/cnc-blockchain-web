@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import { generateKey, fromPrivateKey } from "../modules/keygen";
+import { generateKey, fromPrivateKey } from "cnc-blockchain";
 
 const myPrivateKey = localStorage.getItem("privateKey");
 const generatedKey = generateKey("myKey");

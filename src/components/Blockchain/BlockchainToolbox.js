@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading } from "@chakra-ui/react";
 import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
-import { Transaction as Tx } from "../../modules/blockchain";
-import useInput from "../../hooks/useInput";
 import CreateTransaction from "./CreateTransaction";
 import MiningBlock from "./MiningBlock";
 import Spacing from "../Spacing/Spacing";

@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import BlockchainModule from "../modules/blockchain";
+import BlockchainModule from "cnc-blockchain";
 
 const savedJSON = localStorage.getItem("blockchain");
 const savedCncCoin = savedJSON && BlockchainModule.Blockchain.restore(JSON.parse(savedJSON));
