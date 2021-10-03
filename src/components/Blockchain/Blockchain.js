@@ -6,18 +6,14 @@ import { Center, Heading, Stack, Tag, Button, Text } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import Spacing from "../Spacing/Spacing";
 import BlockchainToolbox from "./BlockchainToolbox";
-import cncCoin from "../../mobx/cncCoin";
 import keypair from "../../mobx/keypair";
+import { useNetwork } from "../../hooks/useNetwork";
 
 const Blockchain = ({}) => {
-  const [obsBlockchain, resetCoin] = cncCoin;
-  const blockchain = obsBlockchain.value;
-  const [state, setState] = useState(1);
+  const [network] = useNetwork();
+
+  const blockchain = network.blockchain;
   const myKeyPair = keypair.value;
-  useEffect(() => {
-    console.log(state);
-    localStorage.setItem("blockchain", JSON.stringify(blockchain));
-  }, [state]);
   return (
     <div>
       <Center padding={"128px 0"}>
@@ -50,7 +46,7 @@ const Blockchain = ({}) => {
       </div>
       <Spacing />
       <div>
-        <BlockchainToolbox blockchain={blockchain} onChange={() => setState(state + 1)} />
+        <BlockchainToolbox blockchain={blockchain} />
       </div>
       <Spacing />
       <div>
@@ -64,14 +60,6 @@ const Blockchain = ({}) => {
             return <Block block={block} />;
           })}
         </Stack>
-      </div>
-      <Spacing />
-      <div>
-        <Heading color={"pink"}>Danger Zone</Heading>
-        <br />
-        <Button colorScheme="pink" variant="solid" onClick={resetCoin}>
-          Destroy blockchain
-        </Button>
       </div>
     </div>
   );

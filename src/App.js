@@ -1,16 +1,17 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { Route, Switch } from "react-router";
 import "./App.css";
+import { useNetwork } from "./hooks/useNetwork";
 import Home from "./pages/Home";
-import theme from "./theme";
+import Loading from "./components/Loading/Loading";
 
 function App() {
-  console.log(theme);
+  const [network, networkAvaliable] = useNetwork();
+  if (!networkAvaliable) {
+    return <Loading />;
+  }
   return (
     <div className="root">
-      {/* <Box p={4} width={"100%"} className={"nav"} bg="white" color="gray.800">
-        <Text fontSize={"3xl"}>nav</Text>
-      </Box> */}
       <Switch>
         <Route exact path={"/"} component={Home} />
       </Switch>

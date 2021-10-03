@@ -5,9 +5,10 @@ import { observer } from "mobx-react-lite";
 import { Transaction as Tx, fromPrivateKey } from "cnc-blockchain";
 import useInput from "../../hooks/useInput";
 import CryptoJS from "crypto-js";
+import { useNetwork } from "../../hooks/useNetwork";
+import { CMD_MAKE_PTX } from "cnc-blockchain";
 
 const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
-  console.log(Tx);
   const defaultInput = {
     fromAddr: keyPair.getPublic("hex"),
     signKey: keyPair.getPrivate("hex"),
@@ -19,9 +20,7 @@ const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
   const [input, handleInput, setInput] = useInput(() => ({
     ...defaultInput,
   }));
-  useEffect(() => {
-    console.log("input update: ", input);
-  }, [input]);
+  const [network] = useNetwork();
 
   const handleCreate = () => {
     const { fromAddr, signKey, toAddr, amount, nft } = input;
@@ -31,9 +30,9 @@ const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
     }
     const tx = new Tx(fromAddr, toAddr, amount, nft);
     tx.signTransaction(fromPrivateKey(signKey));
-    blockchain.addTransaction(tx);
 
-    onChange();
+    network.sendCMD(CMD_MAKE_PTX, tx);
+
     setInput(defaultInput);
   };
   return (

@@ -1,8 +1,12 @@
 import React from "react";
 import { Heading, VStack, Button, Box } from "@chakra-ui/react";
 import Transaction from "./Transaction";
+import { CMD_MAKE_BLOCK } from "cnc-blockchain";
+import { useNetwork } from "../../hooks/useNetwork";
 
-const MiningBlock = ({ blockchain, onChange, keyPair }) => {
+const MiningBlock = ({ keyPair }) => {
+  const [network] = useNetwork();
+  const { blockchain } = network;
   return (
     <VStack spacing={4}>
       <Box width="100%">
@@ -21,8 +25,8 @@ const MiningBlock = ({ blockchain, onChange, keyPair }) => {
               console.error("There is no pendingTransaction");
               return;
             }
-            blockchain.minePendingTransactions(keyPair.getPublic("hex"));
-            onChange();
+            const block = blockchain.minePendingTransactions(keyPair.getPublic("hex"));
+            network.sendCMD(CMD_MAKE_BLOCK, block);
           }}
         >
           create(mining) block
