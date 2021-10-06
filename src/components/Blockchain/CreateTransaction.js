@@ -7,8 +7,10 @@ import useInput from "../../hooks/useInput";
 import CryptoJS from "crypto-js";
 import { useNetwork } from "../../hooks/useNetwork";
 import { CMD_MAKE_PTX } from "cnc-blockchain";
+import { getFileHash, uploadFile } from "../../http";
+import useToast from "../../hooks/useToast";
 
-const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
+const CreateTransaction = ({ keyPair }) => {
   const defaultInput = {
     fromAddr: keyPair.getPublic("hex"),
     signKey: keyPair.getPrivate("hex"),
@@ -21,17 +23,33 @@ const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
     ...defaultInput,
   }));
   const [network] = useNetwork();
+  const [addToast] = useToast();
 
   const handleCreate = () => {
-    const { fromAddr, signKey, toAddr, amount, nft } = input;
+    const { fromAddr, signKey, toAddr, amount, nft, file } = input;
     if (!toAddr) {
-      console.error("toAddr is required");
+      addToast("toAddr is required");
       return;
     }
     const tx = new Tx(fromAddr, toAddr, amount, nft);
     tx.signTransaction(fromPrivateKey(signKey));
+    if (file) {
+      uploadFile(file)
+        .then((res) => {
+          console.log("upload success");
+        })
+        .catch((e) => {
+          addToast("upload fail", e);
+        });
+    }
 
-    network.sendCMD(CMD_MAKE_PTX, tx);
+    console.log(network.blockchain.pendingTransactions.find((ptx) => ptx.fromAddr === tx.fromAddr));
+
+    try {
+      network.sendCMD(CMD_MAKE_PTX, tx);
+    } catch (e) {
+      addToast(e);
+    }
 
     setInput(defaultInput);
   };
@@ -56,7 +74,7 @@ const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
       </InputGroup>
       <InputGroup>
         <InputLeftAddon children="nft" />
-        <Input placeholder={"nft token"} variant="filled" name="nft" value={input.nft} onChange={handleInput} />
+        <Input placeholder={"nft token"} variant="filled" name="nft" value={input.nft} />
       </InputGroup>
       <InputGroup>
         <InputLeftAddon children="nft generator" />
@@ -72,14 +90,32 @@ const CreateTransaction = ({ blockchain, onChange, keyPair }) => {
             const file = e.target.files[0];
             console.log(file);
 
+            getFileHash(file)
+              .then((res) => {
+                const { hash } = res.data;
+                setInput({
+                  ...input,
+                  nft: hash,
+                  amount: 0,
+                });
+              })
+              .catch((e) => {
+                console.error(e);
+                addToast(e.toString());
+              });
+
+            return;
             var reader = new FileReader();
 
             reader.onload = function (event) {
               const binary = event.target.result;
+              console.log("binary", binary, typeof binary);
               const hash = CryptoJS.SHA256(binary).toString();
+              console.log("hash", hash);
               setInput({
                 ...input,
                 nft: hash,
+                amount: 0,
               });
             };
             reader.readAsBinaryString(file);

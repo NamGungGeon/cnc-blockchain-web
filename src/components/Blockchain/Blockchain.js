@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Block from "./Block";
-import Balance from "./Balance";
+import SearchBalance from "./SearchBalance";
 
 import { Center, Heading, Stack, Tag, Button, Text } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
@@ -50,7 +50,7 @@ const Blockchain = ({}) => {
       </div>
       <Spacing />
       <div>
-        <Balance blockchain={blockchain} />
+        <SearchBalance blockchain={blockchain} />
       </div>
       <Spacing />
       <div>

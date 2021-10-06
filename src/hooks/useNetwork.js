@@ -2,15 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { joinNetwork } from "cnc-blockchain";
 import Peerjs from "peerjs";
 
+const host = "3.37.53.134";
+
 let isReady = false;
 const peerCMD = joinNetwork(
   () => {
     isReady = true;
   },
-  "http://3.37.53.134:3003",
+  `http://${host}:3003`,
   new Peerjs(undefined, {
-    host: "3.37.53.134",
-    port: "3004",
+    // host: `${host}`,
+    // port: "3004",
   })
 );
 const listeners = [];

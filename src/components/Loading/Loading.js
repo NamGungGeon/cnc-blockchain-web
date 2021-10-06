@@ -41,28 +41,27 @@ const Loading = ({}) => {
       .forEach((_, idx) => {
         const currentTheta = thetaPoint + intervalThetaOfNode * idx;
         const dy = Math.sin(currentTheta) * radius;
-        console.log("theta", currentTheta);
+        // console.log("theta", currentTheta);
 
-        console.log(idx, dy);
+        // console.log(idx, dy);
 
         let dx = Math.sqrt(Math.pow(radius, 2) - Math.pow(dy, 2));
 
         cords.push([centerX - dx, centerY - dy, `${dy} ${currentTheta}`]);
         cords.push([centerX + dx, centerY + dy, `${dy} ${currentTheta}`]);
       });
-    console.log(cords);
+    // console.log(cords);
     setPoints(cords);
   };
   useEffect(() => {
     if (!ref.current) {
       return;
     }
-    console.log(ref.current);
     renderPoints();
 
     setTimeout(() => {
-      setThetaPoint(thetaPoint + Math.PI / 90);
-    }, 30);
+      setThetaPoint(thetaPoint + Math.PI / 120);
+    }, 20);
   }, [ref, thetaPoint]);
   return (
     <Cover>

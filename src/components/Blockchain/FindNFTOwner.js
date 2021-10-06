@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Alert, Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading, Box, AlertIcon } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
 import CryptoJS from "crypto-js";
+import { getFileHash } from "../../http";
+import useToast from "../../hooks/useToast";
 
 const NOT_FOUND_OWNER = "NOT EXIST NFT";
 const FindNFTOwner = ({ blockchain, onChange, keyPair }) => {
+  const [addToast] = useToast();
   const [input, handleInput, setInput] = useInput({});
   const [owner, setOwner] = useState();
   const handleFindOwner = () => {
@@ -41,17 +44,30 @@ const FindNFTOwner = ({ blockchain, onChange, keyPair }) => {
             const file = e.target.files[0];
             console.log(file);
 
-            var reader = new FileReader();
-
-            reader.onload = function (event) {
-              const binary = event.target.result;
-              const hash = CryptoJS.SHA256(binary).toString();
-              setInput({
-                ...input,
-                nft: hash,
+            getFileHash(file)
+              .then((res) => {
+                const { hash } = res.data;
+                setInput({
+                  ...input,
+                  nft: hash,
+                });
+              })
+              .catch((e) => {
+                console.error(e);
+                addToast(e.toString());
               });
-            };
-            reader.readAsBinaryString(file);
+
+            // var reader = new FileReader();
+
+            // reader.onload = function (event) {
+            //   const binary = event.target.result;
+            //   const hash = CryptoJS.SHA256(binary).toString();
+            //   setInput({
+            //     ...input,
+            //     nft: hash,
+            //   });
+            // };
+            // reader.readAsBinaryString(file);
           }}
         />
       </InputGroup>

@@ -3,7 +3,7 @@ import { Divider, Box } from "@chakra-ui/layout";
 
 const Spacing = ({ px }) => {
   return (
-    <Box style={{ padding: `${px ?? 32}px 0` }}>
+    <Box style={{ padding: `${px ?? 64}px 0` }}>
       <Divider orientation="horizontal" />
     </Box>
   );

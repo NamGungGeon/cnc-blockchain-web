@@ -3,8 +3,9 @@ import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
 import { Alert, Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading, Box, AlertIcon } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
+import useToast from "../../hooks/useToast";
 
-const Balance = ({ blockchain }) => {
+const SearchBalance = ({ blockchain }) => {
   const myKeyPair = keypair.value;
 
   const [input, handleInput] = useInput({
@@ -15,10 +16,11 @@ const Balance = ({ blockchain }) => {
     setBalance(null);
   }, [input]);
 
+  const [addToast] = useToast();
   const searchBalance = () => {
     const { addr } = input;
     if (!addr) {
-      console.error("addr is required");
+      addToast("addr is required");
       return;
     }
 
@@ -49,4 +51,4 @@ const Balance = ({ blockchain }) => {
   );
 };
 
-export default observer(Balance);
+export default observer(SearchBalance);
