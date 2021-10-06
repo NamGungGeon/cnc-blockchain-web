@@ -4,6 +4,7 @@ import "./App.css";
 import { useNetwork } from "./hooks/useNetwork";
 import Home from "./pages/Home";
 import Loading from "./components/Loading/Loading";
+import Toaster from "./components/Toaster/Toaster";
 
 function App() {
   const [network, networkAvaliable] = useNetwork();
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route exact path={"/"} component={Home} />
       </Switch>
+      <Toaster />
     </div>
   );
 }
