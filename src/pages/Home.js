@@ -7,6 +7,7 @@ import Spacing from "../components/Spacing/Spacing";
 import MyNFT from "../components/Blockchain/MyNFT";
 import CreateTransaction from "../components/Blockchain/CreateTransaction";
 import AllNFT from "../components/Blockchain/AllNFT";
+import CreateNFT from "../components/Blockchain/CreateNFT";
 
 const Home = () => {
   const kp = keypair.value;
@@ -34,6 +35,12 @@ const Home = () => {
               <Input placeholder="from address" variant="filled" name="fromAddr" value={network.blockchain.getBalanceOfAddress(kp.getPublic("hex"))} />
             </InputGroup>
           </VStack>
+        </div>
+        <Spacing />
+        <div>
+          <Heading>NFT 만들기</Heading>
+          <br />
+          <CreateNFT />
         </div>
         <Spacing />
         <div>
