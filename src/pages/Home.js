@@ -7,6 +7,7 @@ import Spacing from "../components/Spacing/Spacing";
 import MyNFT from "../components/Blockchain/MyNFT";
 import CreateTransaction from "../components/Blockchain/CreateTransaction";
 import AllNFT from "../components/Blockchain/AllNFT";
+import FileEater from "../components/FileEater/FileEater";
 import CreateNFT from "../components/Blockchain/CreateNFT";
 
 const Home = () => {
