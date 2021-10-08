@@ -1,14 +1,14 @@
 const axios = require("axios");
 const Formdata = require("form-data");
 
-const host = `http://3.37.53.134:3000`;
+const host = `http://3.37.53.134:3004`;
 
 export const getFileHash = (file) => {
   const formdata = new Formdata();
   formdata.append("attachment", file);
   return axios.request({
     method: "POST",
-    url: `${host}/sendHash`,
+    url: `${host}/files/hash`,
     data: formdata,
   });
 };
@@ -18,17 +18,14 @@ export const uploadFile = (file) => {
   formdata.append("attachment", file);
   return axios.request({
     method: "POST",
-    url: `${host}/uploadFileWithOriginalFilename`,
+    url: `${host}/files`,
     data: formdata,
   });
 };
 
 export const getFileFromNFT = (nft) => {
   return axios.request({
-    method: "POST",
-    url: `${host}/sendFile`,
-    data: {
-      nft,
-    },
+    method: "GET",
+    url: `${host}/files/${nft}`,
   });
 };
