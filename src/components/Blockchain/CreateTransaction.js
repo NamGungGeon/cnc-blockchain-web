@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading } from "@chakra-ui/react";
-import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
 import { Transaction as Tx, fromPrivateKey } from "cnc-blockchain";
 import useInput from "../../hooks/useInput";
 import CryptoJS from "crypto-js";
 import { useNetwork } from "../../hooks/useNetwork";
 import { CMD_MAKE_PTX } from "cnc-blockchain";
-import { getFileHash, uploadFile } from "../../http";
+import { uploadFile } from "../../http";
 import useToast from "../../hooks/useToast";
 
 const CreateTransaction = ({ keyPair }) => {
@@ -48,7 +47,8 @@ const CreateTransaction = ({ keyPair }) => {
     try {
       network.sendCMD(CMD_MAKE_PTX, tx);
     } catch (e) {
-      addToast(e);
+      console.error(e, network);
+      addToast(e.toString());
     }
 
     setInput(defaultInput);
@@ -90,7 +90,7 @@ const CreateTransaction = ({ keyPair }) => {
             const file = e.target.files[0];
             console.log(file);
 
-            getFileHash(file)
+            uploadFile(file)
               .then((res) => {
                 const { hash } = res.data;
                 setInput({
