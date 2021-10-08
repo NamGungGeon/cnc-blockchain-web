@@ -2,7 +2,7 @@ import React from "react";
 import { SimpleGrid, Box, Heading, Image, Badge } from "@chakra-ui/react";
 import { getFileFromNFT, getFileHash } from "../../http";
 
-const NFTInfo = ({ nft, owner }) => {
+const NFTInfo = ({ nft, owner, simplify = false }) => {
   return (
     <Box
       maxW="sm"
@@ -18,7 +18,7 @@ const NFTInfo = ({ nft, owner }) => {
           .catch(console.error);
       }}
     >
-      <Image src={"/cube-icon.png"} alt={"nft"} width={"100%"} />
+      {!simplify && <Image src={"/cube-icon.png"} alt={"nft"} width={"100%"} />}
 
       <Box p="6">
         <Box display="flex" alignItems="baseline">
@@ -30,16 +30,20 @@ const NFTInfo = ({ nft, owner }) => {
         <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
           {nft}
         </Box>
-        <br />
 
-        <Box display="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="green">
-            Owner
-          </Badge>
-        </Box>
-        <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-          {owner}
-        </Box>
+        {owner && (
+          <>
+            <br />
+            <Box display="flex" alignItems="baseline">
+              <Badge borderRadius="full" px="2" colorScheme="green">
+                Owner
+              </Badge>
+            </Box>
+            <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+              {owner}
+            </Box>
+          </>
+        )}
       </Box>
     </Box>
   );

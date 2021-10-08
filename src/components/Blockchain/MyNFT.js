@@ -30,9 +30,9 @@ const MyNFT = ({ blockchain, walletAddr }) => {
     return <p>소유한 NFT가 없습니다</p>;
   }
   return (
-    <SimpleGrid columns={3} spacingX="40px" spacingY="20px">
+    <SimpleGrid columns={1} spacingY="20px">
       {nfts.map((nft) => (
-        <NFTInfo nft={nft} owner={""} />
+        <NFTInfo nft={nft} owner={""} simplify key={nft} />
       ))}
     </SimpleGrid>
   );
