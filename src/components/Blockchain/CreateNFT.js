@@ -43,23 +43,15 @@ const CreateNFT = ({}) => {
     }
     const tx = new Tx(fromAddr, toAddr, 0, nft);
     tx.signTransaction(fromPrivateKey(signKey));
-    if (file) {
-      uploadFile(file)
-        .then((res) => {
-          console.log("upload success");
-        })
-        .catch((e) => {
-          addToast("upload fail", e);
-        });
-    }
 
     console.log(network.blockchain.pendingTransactions.find((ptx) => ptx.fromAddr === tx.fromAddr));
 
     try {
       network.sendCMD(CMD_MAKE_PTX, tx);
-      uploadFile(file).then((res) => {
-        setInput(defaultInput);
-        addToast("NFT 생성 요청이 추가되었습니다");
+      if (file)
+        uploadFile(file).then((res) => {
+          setInput(defaultInput);
+          addToast("NFT 생성 요청이 추가되었습니다");
       });
     } catch (e) {
       console.error(e);
