@@ -31,6 +31,7 @@ const withModal = (WrappedComponent) => {
       ...props,
       openModal,
       closeModal,
+      isOpenModal: isOpen
     };
 
     return (
