@@ -1,6 +1,6 @@
 import React from "react";
 import { SimpleGrid, Box, Heading, Image, Badge } from "@chakra-ui/react";
-import { getFileFromNFT, getFileHash } from "../../http";
+import { downloadUrlFile } from "../../util/file";
 
 const NFTInfo = ({ nft, owner, simplify = false }) => {
   return (
@@ -10,12 +10,8 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
       borderRadius="lg"
       overflow="hidden"
       cursor="pointer"
-      onClick={(e) => {
-        getFileFromNFT(nft)
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch(console.error);
+      onClick={e => {
+        downloadUrlFile(`http://3.37.53.134:3004/files/${nft}`);
       }}
     >
       {!simplify && <Image src={"/cube-icon.png"} alt={"nft"} width={"100%"} />}
@@ -27,7 +23,13 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
           </Badge>
         </Box>
 
-        <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+        <Box
+          mt="1"
+          fontWeight="semibold"
+          as="h4"
+          lineHeight="tight"
+          isTruncated
+        >
           {nft}
         </Box>
 
@@ -39,7 +41,13 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
                 Owner
               </Badge>
             </Box>
-            <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+            <Box
+              mt="1"
+              fontWeight="semibold"
+              as="h4"
+              lineHeight="tight"
+              isTruncated
+            >
               {owner}
             </Box>
           </>
