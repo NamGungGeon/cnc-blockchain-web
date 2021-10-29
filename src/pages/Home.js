@@ -9,6 +9,7 @@ import CreateTransaction from "../components/Blockchain/CreateTransaction";
 import AllNFT from "../components/Blockchain/AllNFT";
 import FileEater from "../components/FileEater/FileEater";
 import CreateNFT from "../components/Blockchain/CreateNFT";
+import Wallet from "../components/Wallet/Wallet";
 
 const Home = () => {
   const kp = keypair.value;
@@ -22,20 +23,7 @@ const Home = () => {
         <div>
           <Heading>내 지갑 정보</Heading>
           <br />
-          <VStack spacing={4}>
-            <InputGroup>
-              <InputLeftAddon children="지갑 주소(공개키)" />
-              <Input placeholder="from address" variant="filled" name="fromAddr" value={kp.getPublic("hex")} />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftAddon children="개인키" />
-              <Input placeholder="from address" variant="filled" name="fromAddr" value={kp.getPrivate("hex")} />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftAddon children="잔고" />
-              <Input placeholder="from address" variant="filled" name="fromAddr" value={network.blockchain.getBalanceOfAddress(kp.getPublic("hex"))} />
-            </InputGroup>
-          </VStack>
+          <Wallet/>
         </div>
         <Spacing />
         <div>
