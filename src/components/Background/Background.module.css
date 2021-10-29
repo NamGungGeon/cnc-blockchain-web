@@ -1,0 +1,12 @@
+.background {
+  background-position: center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+
+  filter: brightness(0.8);
+  transition: 0.3s all;
+}
+.background:hover {
+  background-size: 150% auto;
+  filter: brightness(1);
+}

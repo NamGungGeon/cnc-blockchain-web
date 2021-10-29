@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SimpleGrid, Box, Heading, Image, Badge } from "@chakra-ui/react";
+import { getFileFromNFT } from "../../http";
 import { downloadUrlFile } from "../../util/file";
+import Background from "../Background/Background";
+import Spacing from "../Spacing/Spacing";
 
 const NFTInfo = ({ nft, owner, simplify = false }) => {
+  const [fileType, setFileType] = useState("");
+  useEffect(() => {
+    getFileFromNFT(nft)
+      .then(res => {
+        const contentType = res.headers["content-type"];
+        setFileType(contentType);
+      })
+      .catch(console.error);
+  }, [nft]);
+
+  const filePath = `http://3.37.53.134:3004/files/${nft}`;
+
   return (
     <Box
       maxW="sm"
@@ -11,10 +26,27 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
       overflow="hidden"
       cursor="pointer"
       onClick={e => {
-        downloadUrlFile(`http://3.37.53.134:3004/files/${nft}`);
+        downloadUrlFile(filePath);
       }}
     >
-      {!simplify && <Image src={"/cube-icon.png"} alt={"nft"} width={"100%"} />}
+      {!simplify &&
+        (fileType.includes("image") ? (
+          <Background
+            src={filePath}
+            alt={"nft"}
+            height={"150px"}
+            width={"100%"}
+          />
+        ) : (
+          <Background
+            src={"/cube-icon.png"}
+            alt={"nft"}
+            height={"150px"}
+            width={"100%"}
+          />
+        ))}
+
+      <Spacing px={0} />
 
       <Box p="6">
         <Box display="flex" alignItems="baseline">
