@@ -10,7 +10,7 @@ const ButtonFixed = styled.div`
   bottom: 0;
   width: 100%;
   max-width: 256px;
-  z-index: 999;
+  z-index: 9990;
 `;
 const Toaster = () => {
   const [_, __, toasts] = useToast();
