@@ -38,8 +38,7 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
           downloadUrlFile(filePath);
         }}
       >
-      {!simplify &&
-        (fileType.includes("image") ? (
+        {fileType.includes("image") ? (
           <Background
             src={filePath}
             alt={"nft"}
@@ -53,7 +52,8 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
             height={"150px"}
             width={"100%"}
           />
-        ))}
+        )}
+      </div>
 
       <Spacing px={0} />
 
