@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Alert, AlertIcon, AlertTitle, AlertDescription, VStack } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  VStack
+} from "@chakra-ui/react";
 import useToast from "../../hooks/useToast";
 import styled from "styled-components";
 import { observer } from "mobx-react-lite";
@@ -17,7 +23,7 @@ const Toaster = () => {
   return (
     <ButtonFixed>
       <VStack spacing={4}>
-        {toasts.map((toast) => {
+        {toasts.map(toast => {
           return (
             <Alert status="error" variant="solid">
               <AlertIcon />

@@ -1,10 +1,18 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
+} from "@chakra-ui/react";
 import { Box, Button, Lorem } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import React, { useEffect, useState } from "react";
 
-const withModal = (WrappedComponent) => {
-  const Component = (props) => {
+const withModal = WrappedComponent => {
+  const Component = props => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const [modal, setModal] = useState({});
@@ -18,7 +26,7 @@ const withModal = (WrappedComponent) => {
       setModal({
         header,
         body,
-        footer,
+        footer
       });
 
       onOpen();

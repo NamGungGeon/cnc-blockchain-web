@@ -5,6 +5,7 @@ const globalToast = observable({
 });
 const useToast = () => {
   const addToast = (toast, time = 1500) => {
+    console.log(toast);
     globalToast.value = [...globalToast.value, toast];
 
     setTimeout(consumeToast, time);
