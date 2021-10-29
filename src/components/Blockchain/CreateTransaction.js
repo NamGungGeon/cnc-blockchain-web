@@ -46,6 +46,7 @@ const CreateTransaction = ({ keyPair }) => {
 
     try {
       network.sendCMD(CMD_MAKE_PTX, tx);
+      addToast("트랜잭션이 추가되었습니다");
     } catch (e) {
       console.error(e, network);
       addToast(e.toString());
