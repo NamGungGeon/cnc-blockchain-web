@@ -16,16 +16,18 @@ const peerCMD = joinNetwork(
   })
 );
 const listeners = [];
-peerCMD.setCallback(() => {
+peerCMD.setCallback((type, cmd, data) => {
   listeners.forEach((cb) => {
-    cb();
+    cb(type, cmd, data);
   });
 });
 export const useNetwork = () => {
   const network = peerCMD;
   const [avaliable, setAvaliable] = useState(isReady);
   const [tick, setTick] = useState(0);
-  const callback = () => {
+  const [callback, setCallback] = useState(null);
+  const handleListen = (type, cmd, data) => {
+    if (callback) callback(type, cmd, data);
     setTick(Math.random());
   };
   useEffect(() => {
@@ -43,17 +45,15 @@ export const useNetwork = () => {
     }
   }, []);
   useEffect(() => {
-    listeners.push(callback);
+    listeners.push(handleListen);
     return () => {
-      listeners.splice(
-        listeners.findIndex((cb) => cb === callback),
-        1
-      );
+      listeners.splice(listeners.indexOf(handleListen), 1);
     };
   }, []);
   useEffect(() => {
-    console.log(tick);
-  }, [tick]);
+    listeners.splice(listeners.indexOf(handleListen), 1);
+    listeners.push(handleListen);
+  }, [callback]);
 
-  return [network, avaliable];
+  return [network, avaliable, setCallback];
 };

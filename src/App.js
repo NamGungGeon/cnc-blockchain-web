@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Lab from "./pages/Lab";
 import Loading from "./components/Loading/Loading";
 import Toaster from "./components/Toaster/Toaster";
+import BlockchainUtil from "./components/Blockchain/BlockchainUtil";
 
 function App() {
   const [network, networkAvaliable] = useNetwork();
@@ -19,6 +20,7 @@ function App() {
         <Route exact path={"/lab"} component={Lab} />
       </Switch>
       <Toaster />
+      <BlockchainUtil />
     </div>
   );
 }
