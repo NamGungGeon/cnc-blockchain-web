@@ -7,7 +7,7 @@
   align-items: center;
   flex-direction: column;
 
-  min-width: 1024px;
+  min-width: 1200px;
 }
 .root > *:not(.nav) {
   width: 100%;
