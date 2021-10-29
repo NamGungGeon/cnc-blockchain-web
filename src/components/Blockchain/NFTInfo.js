@@ -6,6 +6,7 @@ import Background from "../Background/Background";
 import Spacing from "../Spacing/Spacing";
 
 const NFTInfo = ({ nft, owner, simplify = false }) => {
+  const [detail, setDetail] = useState(false);
   const [fileType, setFileType] = useState("");
   useEffect(() => {
     getFileFromNFT(nft)
@@ -25,10 +26,18 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
       borderRadius="lg"
       overflow="hidden"
       cursor="pointer"
-      onClick={e => {
-        downloadUrlFile(filePath);
+      onMouseOver={e => {
+        setDetail(true);
+      }}
+      onMouseOut={e => {
+        setDetail(false);
       }}
     >
+      <div
+        onClick={e => {
+          downloadUrlFile(filePath);
+        }}
+      >
       {!simplify &&
         (fileType.includes("image") ? (
           <Background
@@ -60,7 +69,7 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
           fontWeight="semibold"
           as="h4"
           lineHeight="tight"
-          isTruncated
+          isTruncated={!detail}
         >
           {nft}
         </Box>
@@ -78,7 +87,7 @@ const NFTInfo = ({ nft, owner, simplify = false }) => {
               fontWeight="semibold"
               as="h4"
               lineHeight="tight"
-              isTruncated
+              isTruncated={!detail}
             >
               {owner}
             </Box>
