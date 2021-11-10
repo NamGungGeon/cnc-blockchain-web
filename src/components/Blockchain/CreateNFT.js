@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  VStack,
+  Heading
+} from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { Transaction as Tx, fromPrivateKey } from "cnc-blockchain";
 import useInput from "../../hooks/useInput";
@@ -15,14 +23,15 @@ const CreateNFT = ({}) => {
   const defaultInput = {
     fromAddr: kp.getPublic("hex"),
     signKey: kp.getPrivate("hex"),
-    toAddr: "04f22c8735ba98617ad4fe76bd27b3e569e1808e0ca2c8f3d2946b4d4eaa6ee333719325a24709b4ca354bf251beff59241deb091cc9d46cf60fdc9fdbb8e20b78",
+    toAddr:
+      "04f22c8735ba98617ad4fe76bd27b3e569e1808e0ca2c8f3d2946b4d4eaa6ee333719325a24709b4ca354bf251beff59241deb091cc9d46cf60fdc9fdbb8e20b78",
     amount: 0,
     nft: "",
     file: null,
-    fileName: "",
+    fileName: ""
   };
   const [input, handleInput, setInput] = useInput(() => ({
-    ...defaultInput,
+    ...defaultInput
   }));
   const [network] = useNetwork();
   const [addToast] = useToast();
@@ -44,15 +53,19 @@ const CreateNFT = ({}) => {
     const tx = new Tx(fromAddr, toAddr, 0, nft);
     tx.signTransaction(fromPrivateKey(signKey));
 
-    console.log(network.blockchain.pendingTransactions.find((ptx) => ptx.fromAddr === tx.fromAddr));
+    console.log(
+      network.blockchain.pendingTransactions.find(
+        ptx => ptx.fromAddr === tx.fromAddr
+      )
+    );
 
     try {
       network.sendCMD(CMD_MAKE_PTX, tx);
       if (file)
-        uploadFile(file).then((res) => {
+        uploadFile(file).then(res => {
           setInput(defaultInput);
           addToast("NFT 생성 요청이 추가되었습니다");
-      });
+        });
     } catch (e) {
       console.error(e);
       addToast(e.toString());
@@ -62,7 +75,12 @@ const CreateNFT = ({}) => {
     <VStack spacing={4}>
       <InputGroup>
         <InputLeftAddon children="nft" />
-        <Input placeholder={"nft token"} variant="filled" name="nft" value={input.nft} />
+        <Input
+          placeholder={"nft token"}
+          variant="filled"
+          name="nft"
+          value={input.nft}
+        />
       </InputGroup>
       <InputGroup>
         <Input
@@ -71,29 +89,34 @@ const CreateNFT = ({}) => {
           variant="filled"
           name="file"
           value={input.fileName}
-          onChange={(e) => {
+          onChange={e => {
             const file = e.target.files[0];
             console.log(e.target.files, e.target.value);
 
             getFileHash(file)
-              .then((res) => {
+              .then(res => {
                 const { hash } = res.data;
                 setInput({
                   ...input,
                   nft: hash,
                   amount: 0,
                   file,
-                  fileName: e.target.value,
+                  fileName: e.target.value
                 });
               })
-              .catch((e) => {
+              .catch(e => {
                 console.error(e);
                 addToast(e.toString());
               });
           }}
         />
       </InputGroup>
-      <Button colorScheme="blue" onClick={handleCreate} disabled={!input.nft}>
+      <Button
+        width={"100%"}
+        colorScheme="blue"
+        onClick={handleCreate}
+        disabled={!input.nft}
+      >
         NFT 생성
       </Button>
     </VStack>

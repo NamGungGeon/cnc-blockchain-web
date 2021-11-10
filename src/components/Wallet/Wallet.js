@@ -102,11 +102,13 @@ const Wallet = ({ openModal, closeModal, isOpenModal }) => {
             value={network.blockchain.getBalanceOfAddress(kp.getPublic("hex"))}
           />
         </InputGroup>
-        <div>
-          <Button colorScheme={"blue"} onClick={handleUpdateWallet}>
-            지갑 정보 변경
-          </Button>
-        </div>
+        <Button
+          colorScheme={"blue"}
+          onClick={handleUpdateWallet}
+          width={"100%"}
+        >
+          지갑 정보 변경
+        </Button>
       </VStack>
     </div>
   );
