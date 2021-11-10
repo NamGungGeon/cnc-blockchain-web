@@ -1,12 +1,22 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
-import { Input, InputGroup, InputLeftAddon, VStack, Heading, Flex, Box } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  VStack,
+  Heading,
+  Flex,
+  Box,
+  Switch,
+  HStack
+} from "@chakra-ui/react";
 import keypair from "../mobx/keypair";
 import { useNetwork } from "../hooks/useNetwork";
 import Spacing from "../components/Spacing/Spacing";
 import MyNFT from "../components/Blockchain/MyNFT";
 import CreateTransaction from "../components/Blockchain/CreateTransaction";
-import AllNFT from "../components/Blockchain/AllNFT";
+import AllNFT from "../components/Blockchain/NFTList";
 import FileEater from "../components/FileEater/FileEater";
 import CreateNFT from "../components/Blockchain/CreateNFT";
 import Wallet from "../components/Wallet/Wallet";
@@ -16,6 +26,7 @@ const Home = () => {
   console.log("kp", kp);
 
   const [network] = useNetwork();
+  const [onlyMine, setOnlyMine] = useState(false);
 
   return (
     <Flex>
@@ -23,7 +34,7 @@ const Home = () => {
         <div>
           <Heading>내 지갑 정보</Heading>
           <br />
-          <Wallet/>
+          <Wallet />
         </div>
         <Spacing />
         <div>
@@ -31,21 +42,23 @@ const Home = () => {
           <br />
           <CreateNFT />
         </div>
-        <Spacing />
-        <div>
-          <Heading>나의 NFT</Heading>
-          <br />
-          <VStack spacing={4}>
-            <MyNFT blockchain={network.blockchain} walletAddr={kp.getPublic("hex")} />
-          </VStack>
-        </div>
       </Box>
       <Box w={"32px"}></Box>
       <Box flex={1}>
         <div>
-          <Heading>모든 NFT</Heading>
-          <br />
-          <AllNFT />
+          <HStack spacing={4}>
+            <span>내 소유의 NFT만 보기</span>
+            <Switch
+              size={"lg"}
+              isChecked={onlyMine}
+              onChange={e => {
+                console.log("switch", e.target.checked);
+                setOnlyMine(e.target.checked);
+              }}
+            />
+          </HStack>
+          <Spacing px={32} />
+          {onlyMine ? <MyNFT /> : <AllNFT />}
         </div>
       </Box>
     </Flex>
