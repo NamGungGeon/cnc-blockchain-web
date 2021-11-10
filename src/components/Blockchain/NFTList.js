@@ -1,30 +1,39 @@
 import React from "react";
-import { SimpleGrid, Box, Heading, Image, Badge, VStack } from "@chakra-ui/react";
+import {
+  SimpleGrid,
+  Box,
+  Heading,
+  Image,
+  Badge,
+  VStack,
+  HStack
+} from "@chakra-ui/react";
 import { useNetwork } from "../../hooks/useNetwork";
 import { receptionist } from "cnc-blockchain";
 import NFTInfo from "./NFTInfo";
 import { IconButton } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import withModal from "../../hoc/withModal";
 import FindNFTOwner from "./FindNFTOwner";
+import TransferNFT from "./TransferNFT";
 
-const AllNFT = ({ openModal, closeModal }) => {
+const NFTList = ({ openModal, closeModal, targetAddr }) => {
   const [network] = useNetwork();
 
   const nftInfos = [];
-  const getNftInfo = (nft) => {
-    return nftInfos.find((info) => info.nft === nft);
+  const getNftInfo = nft => {
+    return nftInfos.find(info => info.nft === nft);
   };
   network.blockchain.chain.map((block, idx) => {
     if (idx === 0) return;
 
-    block.transactions.map((tx) => {
+    block.transactions.map(tx => {
       if (!tx.nft) return;
 
       if (tx.toAddr === receptionist) {
         nftInfos.push({
           nft: tx.nft,
-          owner: tx.fromAddr,
+          owner: tx.fromAddr
         });
       } else {
         const nftInfo = getNftInfo(tx.fromAddr);
@@ -39,17 +48,26 @@ const AllNFT = ({ openModal, closeModal }) => {
   return (
     <div>
       <VStack spacing={4}>
-        <Box w={"100%"}>
-          <IconButton
-            aria-label="Search database"
-            icon={<SearchIcon />}
-            onClick={(e) => {
-              openModal("NFT 검색", <FindNFTOwner />);
-            }}
-          />
-        </Box>
+        <HStack spacing={4} width={"100%"}>
+          <Box>
+            <IconButton
+              icon={<SearchIcon />}
+              onClick={e => {
+                openModal("NFT 검색", <FindNFTOwner />);
+              }}
+            />
+          </Box>
+          <Box>
+            <IconButton
+              icon={<ArrowRightIcon />}
+              onClick={e => {
+                openModal("NFT 보내기", <TransferNFT />);
+              }}
+            />
+          </Box>
+        </HStack>
         <SimpleGrid columns={4} spacingX="16px" spacingY="16px">
-          {nftInfos.map((nftInfo) => (
+          {nftInfos.map(nftInfo => (
             <NFTInfo nft={nftInfo.nft} owner={nftInfo.owner} />
           ))}
         </SimpleGrid>
@@ -58,4 +76,4 @@ const AllNFT = ({ openModal, closeModal }) => {
   );
 };
 
-export default withModal(AllNFT);
+export default withModal(NFTList);
