@@ -48,7 +48,7 @@ const NFTList = ({ openModal, closeModal, targetAddr }) => {
   return (
     <div>
       <VStack spacing={4}>
-        <HStack spacing={4} width={"100%"}>
+        <HStack spacing={4} width={"100%"} justify={"flex-end"}>
           <Box>
             <IconButton
               icon={<SearchIcon />}

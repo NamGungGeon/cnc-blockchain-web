@@ -56,7 +56,7 @@ const withModal = WrappedComponent => {
 
               <ModalFooter>
                 {modal.footer ?? (
-                  <Button colorScheme="blue" mr={3} onClick={onClose}>
+                  <Button mr={3} onClick={onClose}>
                     닫기
                   </Button>
                 )}

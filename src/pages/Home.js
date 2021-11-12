@@ -43,7 +43,7 @@ const Home = () => {
           <CreateNFT />
         </div>
       </Box>
-      <Box w={"32px"}></Box>
+      <Box w={"16px"}></Box>
       <Box flex={1}>
         <div>
           <HStack spacing={4}>
