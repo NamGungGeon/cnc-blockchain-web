@@ -4542,10 +4542,10 @@ cliui@^6.0.0:
     strip-ansi "^6.0.0"
     wrap-ansi "^6.2.0"
 
-cnc-blockchain@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/cnc-blockchain/-/cnc-blockchain-1.4.0.tgz#c258e7ea9928b0cbd83b307a85ccf9d456035a79"
-  integrity sha512-oGRfIxm/G/R+ssQzSErd3ffHnryoXmSnK8Dkv2g02eNE2uijg8PJCXnEDZ8x2IUBS4zNmbu+EvV6knSWhIrKFQ==
+cnc-blockchain@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/cnc-blockchain/-/cnc-blockchain-2.0.1.tgz#876d88f2d1e6ff0e4cba709448cef4628a6a3e1b"
+  integrity sha512-YlqqphJ9GMK43v+pjLoMvZ3uamLEOwKfGkS0J9lv2fhuNSTF4/Owkd6GbBrN1P8b0/i7f6MPnKXn/FBVeuUcLA==
   dependencies:
     crypto-js "^4.1.1"
     elliptic "^6.5.4"
