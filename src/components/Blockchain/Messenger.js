@@ -8,7 +8,6 @@ import MsgMaker from "./MsgMaker";
 import { Badge, Divider, HStack, Text } from "@chakra-ui/layout";
 import keypair from "../../mobx/keypair";
 import { Tag } from "@chakra-ui/tag";
-import Spacing from "../Spacing/Spacing";
 
 const Messenger = ({ openModal, closeModal }) => {
   const [readMsgs, setReadMsgs] = useState(

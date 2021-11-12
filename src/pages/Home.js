@@ -1,23 +1,11 @@
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import {
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  VStack,
-  Heading,
-  Flex,
-  Box,
-  Switch,
-  HStack
-} from "@chakra-ui/react";
+import { Heading, Flex, Box, Switch, HStack } from "@chakra-ui/react";
 import keypair from "../mobx/keypair";
 import { useNetwork } from "../hooks/useNetwork";
 import Spacing from "../components/Spacing/Spacing";
 import MyNFT from "../components/Blockchain/MyNFT";
-import CreateTransaction from "../components/Blockchain/CreateTransaction";
 import AllNFT from "../components/Blockchain/NFTList";
-import FileEater from "../components/FileEater/FileEater";
 import CreateNFT from "../components/Blockchain/CreateNFT";
 import Wallet from "../components/Wallet/Wallet";
 

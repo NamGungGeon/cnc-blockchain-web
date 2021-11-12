@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading, Box, AlertIcon } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
-import CryptoJS from "crypto-js";
 import { getFileHash } from "../../http";
 import useToast from "../../hooks/useToast";
 

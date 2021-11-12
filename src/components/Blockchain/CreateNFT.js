@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Button,
-  ButtonGroup,
   Input,
   InputGroup,
   InputLeftAddon,
-  VStack,
-  Heading
+  VStack
 } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { Transaction as Tx, fromPrivateKey } from "cnc-blockchain";
 import useInput from "../../hooks/useInput";
-import CryptoJS from "crypto-js";
 import { useNetwork } from "../../hooks/useNetwork";
 import { CMD_MAKE_PTX } from "cnc-blockchain";
 import { getFileHash, uploadFile } from "../../http";

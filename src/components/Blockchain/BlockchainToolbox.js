@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading } from "@chakra-ui/react";
+import React from "react";
 import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
 import CreateTransaction from "./CreateTransaction";
@@ -11,11 +10,23 @@ const BlockchainToolbox = ({ blockchain, onChange }) => {
   const myKeyPair = keypair.value;
   return (
     <div>
-      <MiningBlock blockchain={blockchain} onChange={onChange} keyPair={myKeyPair} />
+      <MiningBlock
+        blockchain={blockchain}
+        onChange={onChange}
+        keyPair={myKeyPair}
+      />
       <Spacing />
-      <CreateTransaction blockchain={blockchain} onChange={onChange} keyPair={myKeyPair} />
+      <CreateTransaction
+        blockchain={blockchain}
+        onChange={onChange}
+        keyPair={myKeyPair}
+      />
       <Spacing />
-      <FindNFTOwner blockchain={blockchain} onChange={onChange} keyPair={myKeyPair} />
+      <FindNFTOwner
+        blockchain={blockchain}
+        onChange={onChange}
+        keyPair={myKeyPair}
+      />
     </div>
   );
 };

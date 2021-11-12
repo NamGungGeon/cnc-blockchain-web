@@ -1,5 +1,14 @@
 import React from "react";
-import { Tag, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box, Text } from "@chakra-ui/react";
+import {
+  Tag,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+  Text
+} from "@chakra-ui/react";
 
 const Transaction = ({ transaction }) => {
   return (
@@ -17,7 +26,8 @@ const Transaction = ({ transaction }) => {
           <AccordionPanel pb={4} style={{ fontSize: "1em" }}>
             <Tag size="sm">from</Tag>
             <br />
-            {transaction.fromAddr?.substring(0, 10).concat("...") || "mining reward"}
+            {transaction.fromAddr?.substring(0, 10).concat("...") ||
+              "mining reward"}
             <br />
             <Tag size="sm">to</Tag>
             <br />

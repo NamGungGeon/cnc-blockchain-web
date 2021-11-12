@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SimpleGrid, Box, Heading, Image, Badge } from "@chakra-ui/react";
+import { Box, Badge } from "@chakra-ui/react";
 import { getFileFromNFT } from "../../http";
 import { downloadUrlFile } from "../../util/file";
 import Background from "../Background/Background";

@@ -2,9 +2,6 @@ import React from "react";
 import {
   SimpleGrid,
   Box,
-  Heading,
-  Image,
-  Badge,
   VStack,
   HStack
 } from "@chakra-ui/react";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { receptionist } from "cnc-blockchain";
 import { useNetwork } from "../../hooks/useNetwork";
 import { SimpleGrid } from "@chakra-ui/react";

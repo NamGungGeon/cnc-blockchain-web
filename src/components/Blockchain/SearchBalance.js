@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import keypair from "../../mobx/keypair";
 import { observer } from "mobx-react-lite";
-import { Alert, Button, ButtonGroup, Input, InputGroup, InputLeftAddon, VStack, Heading, Box, AlertIcon } from "@chakra-ui/react";
+import { Alert, Button, Input, InputGroup, InputLeftAddon, VStack, Heading, Box, AlertIcon } from "@chakra-ui/react";
 import useInput from "../../hooks/useInput";
 import useToast from "../../hooks/useToast";
 
