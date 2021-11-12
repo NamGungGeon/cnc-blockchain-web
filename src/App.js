@@ -1,4 +1,3 @@
-import { Box, Text } from "@chakra-ui/layout";
 import { Route, Switch } from "react-router";
 import "./App.css";
 import { useNetwork } from "./hooks/useNetwork";
@@ -7,6 +6,7 @@ import Lab from "./pages/Lab";
 import Loading from "./components/Loading/Loading";
 import Toaster from "./components/Toaster/Toaster";
 import BlockchainUtil from "./components/Blockchain/BlockchainUtil";
+import MailBox from "./pages/MailBox";
 
 function App() {
   const [network, networkAvaliable] = useNetwork();
@@ -18,6 +18,7 @@ function App() {
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/lab"} component={Lab} />
+        <Route exact path={"/mailbox"} component={MailBox} />
       </Switch>
       <Toaster />
       <BlockchainUtil />
