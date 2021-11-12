@@ -20,6 +20,12 @@ const Home = () => {
     <Flex>
       <Box w={"256px"}>
         <div>
+          <a href="/">
+            <img width={"100%"} height={"auto"} src={"/logo.png"} />
+          </a>
+        </div>
+        <Spacing />
+        <div>
           <Heading>내 지갑 정보</Heading>
           <br />
           <Wallet />
@@ -31,7 +37,7 @@ const Home = () => {
           <CreateNFT />
         </div>
       </Box>
-      <Box w={"16px"}></Box>
+      <Box w={"32px"}></Box>
       <Box flex={1}>
         <div>
           <HStack spacing={4}>
